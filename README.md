@@ -2,7 +2,7 @@
 
 ## Overview
 
-The extension expose an API for private extension publisher to update their extension automatically. (e.g. your extension is published in your company's private website)
+The extension expose an API for private extension publisher to update their extension automatically. This would be useful when you want to publish your extension privately and don't want to publish it to the VS Code Marketplace.
 
 ## Getting Started
 

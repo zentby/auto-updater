@@ -3,8 +3,9 @@ import { ExtensionContext, Uri } from "vscode";
 import { FileDownloader } from "@microsoft/vscode-file-downloader-api";
 import * as vscode from "vscode";
 import { log } from "./logger";
+import { IAutorUpdater } from "./types";
 
-export class AutoUpdater {
+export class AutoUpdater implements IAutorUpdater {
     public constructor(private _fileDownloader: FileDownloader) {}
 
 
