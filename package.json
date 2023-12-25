@@ -3,6 +3,7 @@
     "displayName": "Auto Updater",
     "publisher": "yangzhao",
     "description": "Expose an API to allow VSCode extension get updated with a private link",
+    "repository": "https://github.com/zentby/auto-updater.git",
     "version": "1.0.0",
     "license": "MIT",
     "engines": {
