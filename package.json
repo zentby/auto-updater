@@ -4,7 +4,7 @@
     "publisher": "yangzhao",
     "description": "Expose an API to allow VSCode extension get updated with a private link",
     "repository": "https://github.com/zentby/auto-updater.git",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "license": "MIT",
     "engines": {
         "vscode": "^1.85.0"
@@ -39,6 +39,7 @@
         "eslint-plugin-node": "^11.1.0",
         "eslint-plugin-prefer-arrow": "^1.2.3",
         "eslint-plugin-tslint": "^3.1.0",
+        "node-stream-zip": "^1.15.0",
         "ts-loader": "^9.5.1",
         "typescript": "^5.3.2",
         "webpack": "^5.89.0",

@@ -1,13 +1,14 @@
 import path from "path";
+import fs from "fs";
 import { ExtensionContext, Uri } from "vscode";
 import { FileDownloader } from "@microsoft/vscode-file-downloader-api";
 import * as vscode from "vscode";
+import streamZip from 'node-stream-zip';
 import { log } from "./logger";
 import { IAutorUpdater } from "./types";
 
 export class AutoUpdater implements IAutorUpdater {
     public constructor(private _fileDownloader: FileDownloader) {}
-
 
     /**
      * Update extension automatically
@@ -20,14 +21,51 @@ export class AutoUpdater implements IAutorUpdater {
             throw new Error(`Invalid extension context`);
         }
         const extensionName = path.basename(context.extensionPath);
-        log(`Updating extension ${extensionName} from ${url}}`);
         const filename = getFileName(extensionName);
         const file = await this._fileDownloader.downloadFile(Uri.parse(url), filename, context);
-        await vscode.commands.executeCommand(`workbench.extensions.installExtension`, file);
-        log(`Extension ${extensionName} updated`);
-        await this._fileDownloader.deleteItem(filename, context);
+        log(`Checking update for extension ${extensionName} from ${url}`);
+        if (await this.verifyVersion(file, context)){
+            log(`Updating extension ${extensionName}`);
+            await vscode.commands.executeCommand(`workbench.extensions.installExtension`, file);
+            log(`Extension ${extensionName} updated`);
+            await this._fileDownloader.deleteItem(filename, context);
+        }
+        else{
+            log(`No update for extension ${extensionName} from ${url}`);
+        }
+    }
+
+    private async verifyVersion(file: Uri, context: ExtensionContext): Promise<boolean> {
+        const zipPromise = new Promise<any>((resolve, reject) => {
+            const zip = new streamZip({file: file.fsPath, storeEntries: true});
+            zip.on(`ready`, () => {
+                const zipDotTxtContents = zip.entryDataSync(`extension/package.json`).toString(`utf8`);
+                resolve(JSON.parse(zipDotTxtContents));
+                zip.close();
+            });
+            zip.on(`error`, (error) => {
+                reject(error);
+            });
+        });
+        const newPkg = await zipPromise;
+        const packageJsonPath = path.join(context.extensionPath, `package.json`);
+        const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, `utf8`));
+        const {name, displayName, publisher, version} = packageJson;
+        const {name: newName, publisher: newPublisher, version: newVersion} = newPkg;
+        if (name !== newName) {
+            throw new Error(`Package name mismatch. Expected ${name} but got ${newName}. Update aborted.`);
+        }
+        if ((Boolean(publisher)) && (Boolean(newPublisher)) && publisher !== newPublisher) {
+            throw new Error(`Package publisher mismatch. Expected ${publisher} but got ${newPublisher}. Update aborted.`);
+        }
+        if (newVersion !== version) {
+            log(`New Version Found for extension ${displayName} (${name}): ${newVersion}`);
+            return true;
+        }
+        return false;
     }
 }
+
 /**
  * Convert extension name to a valid file name
  * @returns {string} file name

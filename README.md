@@ -34,6 +34,10 @@ if (updater) {
 
 The extension is using Microsoft's VS Code File Downloader `"mindaro-dev.file-downloader"` under the hood. So you need to have it installed in your VS Code. (It should be automatically installed when you install this extension)
 
+> Note: The extension only update extension that matchese the publisher name and extension name in the URL. So make sure you have the correct publisher name and extension name in the URL.
+
+The extension doesn't solve the distribution issue. So you still need to ask the users to manual install your extension for the first time. This can be done either from [VS Code UI](https://code.visualstudio.com/docs/editor/extension-gallery#_install-from-a-vsix) or from command line `code --install-extension your-extension.vsix`. If you add the check update function in your extension's activation function, then the extension will be updated automatically when there is a new version.
+
 ## License
 
 This project is licensed under the MIT License.
