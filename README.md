@@ -34,12 +34,6 @@ if (updater) {
 
 The extension is using Microsoft's VS Code File Downloader `"mindaro-dev.file-downloader"` under the hood. So you need to have it installed in your VS Code. (It should be automatically installed when you install this extension)
 
-## Release Notes
-
-### 1.0.0
-- Initial release
-- Support auto update for private extension publisher
-
 ## License
 
 This project is licensed under the MIT License.
