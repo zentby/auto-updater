@@ -4,7 +4,11 @@
     "publisher": "yangzhao",
     "description": "Expose an API to allow VSCode extension get updated with a private link",
     "repository": "https://github.com/zentby/auto-updater.git",
-    "version": "1.1.0",
+    "author": {
+        "name": "Yang Zhao",
+        "email": "yangzhao.nz@gmail.com"
+    },
+    "version": "1.2.0",
     "license": "MIT",
     "engines": {
         "vscode": "^1.85.0"
@@ -16,6 +20,25 @@
     "extensionDependencies": [
         "mindaro-dev.file-downloader"
     ],
+    "contributes": {
+        "configuration": {
+            "title": "Auto Updater",
+            "properties": {
+                "auto-updater.check-frequency": {
+                    "type": "number",
+                    "title": "Check Frequency (days)",
+                    "default": 7,
+                    "description": "How often to check for updates (in days)"
+                },
+                "auto-updater.disabled": {
+                    "type": "boolean",
+                    "title": "Disabled",
+                    "default": false,
+                    "description": "Disable auto updater"
+                }
+            }
+        }
+    },
     "main": "./dist/extension.js",
     "scripts": {
         "vscode:prepublish": "webpack --mode production",

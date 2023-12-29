@@ -6,6 +6,7 @@ import * as vscode from "vscode";
 import streamZip from 'node-stream-zip';
 import { log } from "./logger";
 import { IAutorUpdater } from "./types";
+import { Config } from "./config";
 
 export class AutoUpdater implements IAutorUpdater {
     public constructor(private _fileDownloader: FileDownloader) {}
@@ -21,6 +22,10 @@ export class AutoUpdater implements IAutorUpdater {
             throw new Error(`Invalid extension context`);
         }
         const extensionName = path.basename(context.extensionPath);
+        const config = new Config(context);
+        if (!config.shouldUpdate(context)){
+            return;
+        }
         const filename = getFileName(extensionName);
         const file = await this._fileDownloader.downloadFile(Uri.parse(url), filename, context);
         log(`Checking update for extension ${extensionName} from ${url}`);
@@ -33,6 +38,8 @@ export class AutoUpdater implements IAutorUpdater {
         else{
             log(`No update for extension ${extensionName} from ${url}`);
         }
+
+        config.lastCheckedDate = new Date();
     }
 
     private async verifyVersion(file: Uri, context: ExtensionContext): Promise<boolean> {
