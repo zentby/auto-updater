@@ -4,8 +4,9 @@ The extension expose an API for private extension publisher to update their exte
 
 The extension would work better with [Extension Auto Installer](https://marketplace.visualstudio.com/items?itemName=yangzhao.auto-installer) extension. You can use the auto installer to install your extension for the first time and then use this api to continuously update your extension.
 
-🟩 Extension Auto Installer (this extension) will install the extensions. - Private Distribution
-✅ [Extension Auto Updater](https://marketplace.visualstudio.com/items?itemName=yangzhao.auto-updater) will manage the future updates for your extensions. - Continuous Delivery
+🟩 [Extension Auto Installer](https://marketplace.visualstudio.com/items?itemName=yangzhao.auto-installer) will install the extensions. - Private Distribution
+<br/>
+✅ Extension Auto Updater (this extension) will manage the future updates for your extensions. - Continuous Delivery
 
 **If your extension intend to publish to VSCode maketplace, you don't need to integrate this extension.**
 
