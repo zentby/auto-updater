@@ -9,12 +9,8 @@
         "project": "tsconfig.json",
         "sourceType": "module"
     },
-    "plugins": [
-        "@typescript-eslint",
-        "eslint-plugin-import",
-        "eslint-plugin-jsdoc",
-        "eslint-plugin-prefer-arrow"
-    ],
+    "plugins": ["@typescript-eslint", "eslint-plugin-import", "eslint-plugin-jsdoc", "eslint-plugin-prefer-arrow", "prettier"],
+    "extends": ["plugin:prettier/recommended"],
     "rules": {
         "@typescript-eslint/array-type": [
             "error",
@@ -54,21 +50,6 @@
             "error",
             {
                 "accessibility": "explicit"
-            }
-        ],
-        "@typescript-eslint/indent": [
-            "error",
-            4,
-            {
-                "ArrayExpression": "first",
-                "ObjectExpression": "first",
-                "FunctionDeclaration": {
-                    "parameters": "first"
-                },
-                "FunctionExpression": {
-                    "parameters": "first"
-                },
-                "SwitchCase": 1
             }
         ],
         "@typescript-eslint/member-delimiter-style": [
@@ -132,7 +113,7 @@
         "@typescript-eslint/prefer-for-of": "error",
         "@typescript-eslint/prefer-function-type": "error",
         "@typescript-eslint/prefer-namespace-keyword": "error",
-        "@typescript-eslint/quotes": ["error", "backtick"],
+        "@typescript-eslint/quotes": ["error", "single"],
         "@typescript-eslint/require-await": "error",
         "@typescript-eslint/semi": ["error"],
         "@typescript-eslint/strict-boolean-expressions": "error",
@@ -148,9 +129,7 @@
         "@typescript-eslint/unified-signatures": "error",
         "arrow-body-style": "error",
         "arrow-parens": ["off", "always"],
-        "brace-style": ["error", "stroustrup"],
         "camelcase": "error",
-        "comma-dangle": "error",
         "complexity": "off",
         "constructor-super": "error",
         "curly": "error",
@@ -158,18 +137,7 @@
         "eol-last": "off",
         "eqeqeq": ["error", "smart"],
         "guard-for-in": "error",
-        "id-blacklist": [
-            "error",
-            "any",
-            "Number",
-            "number",
-            "String",
-            "string",
-            "Boolean",
-            "boolean",
-            "Undefined",
-            "undefined"
-        ],
+        "id-blacklist": ["error", "any", "Number", "number", "String", "string", "Boolean", "boolean", "Undefined", "undefined"],
         "id-match": "error",
         "import/order": "error",
         "jsdoc/check-alignment": "error",

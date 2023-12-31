@@ -1,8 +1,13 @@
-# Auto Updater
+# Extension Auto Updater
 
-## Overview
+The extension expose an API for private extension publisher to update their extension automatically. This would be useful when you want to publish your extension privately and don't want to publish it to the VS Code Marketplace. E.g. In a large organization/enterprise, you may have your own extensions that are not published to the marketplace. You can use this extension to install those extensions.
 
-The extension expose an API for private extension publisher to update their extension automatically. This would be useful when you want to publish your extension privately and don't want to publish it to the VS Code Marketplace.
+The extension would work better with [Extension Auto Installer](https://marketplace.visualstudio.com/items?itemName=yangzhao.auto-installer) extension. You can use the auto installer to install your extension for the first time and then use this api to continuously update your extension.
+
+🟩 Extension Auto Installer (this extension) will install the extensions. - Private Distribution
+✅ [Extension Auto Updater](https://marketplace.visualstudio.com/items?itemName=yangzhao.auto-updater) will manage the future updates for your extensions. - Continuous Delivery
+
+**If your extension intend to publish to VSCode maketplace, you don't need to integrate this extension.**
 
 ## Getting Started
 
@@ -37,6 +42,11 @@ The extension is using Microsoft's VS Code File Downloader `"mindaro-dev.file-do
 > Note: The extension only update extension that matchese the publisher name and extension name in the URL. So make sure you have the correct publisher name and extension name in the URL.
 
 The extension doesn't solve the distribution issue. So you still need to ask the users to manual install your extension for the first time. This can be done either from [VS Code UI](https://code.visualstudio.com/docs/editor/extension-gallery#_install-from-a-vsix) or from command line `code --install-extension your-extension.vsix`. If you add the check update function in your extension's activation function, then the extension will be updated automatically when there is a new version.
+
+
+## Release Notes
+
+See [CHANGELOG](./CHANGELOG.md) section.
 
 ## License
 
