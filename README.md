@@ -36,6 +36,26 @@ if (updater) {
 }
 ```
 
+**Note: if the extension is not auto-installed with you extension, add the following code in your checking logic to install it**;
+
+```ts
+let updater = vscode.extensions.getExtension("yangzhao.auto-updater");
+if (!updater) {
+  await vscode.commands.executeCommand(
+    "workbench.extensions.installExtension",
+    "yangzhao.auto-updater"
+  );
+  updater = vscode.extensions.getExtension("yangzhao.auto-updater");
+}
+```
+
+## Configurations
+
+- Option `auto-updater.check-frequency` - The frequency to check for updates. Default is 0 (days) which means every time the main extension is activated the updater will check for updates. **Recommend only change it if the checking is too heavy.**
+
+- Option `auto-updater.disabled` - Disable the auto updater. Default is false. If the updater is disabled, no updates will be checked.
+
+
 ## Requirements
 
 The extension is using Microsoft's VS Code File Downloader `"mindaro-dev.file-downloader"` under the hood. So you need to have it installed in your VS Code. (It should be automatically installed when you install this extension)
