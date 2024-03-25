@@ -21,7 +21,7 @@ export class Config {
   }
   public get checkFrequency(): number {
     const config = vscode.workspace.getConfiguration('auto-updater');
-    return config.get(checkFrequencyKey, 7); // Default value is 7 days
+    return config.get(checkFrequencyKey, 0);
   }
 
   public get lastCheckedDate(): Date {
